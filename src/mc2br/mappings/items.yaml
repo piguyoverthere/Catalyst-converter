@@ -1,0 +1,48 @@
+# Replacement key for MCreator "item" elements.
+#
+# Each entry under `fields` maps an MCreator field name (from the element's
+# "definition" in elements/<Name>.mod.json) to a Bedrock item component.
+#
+#   component: the Bedrock component name
+#   wrap:      put the value inside an object under this key
+#              e.g. wrap: max_durability  ->  {"max_durability": <value>}
+#   extra:     additional fixed keys to add to that object
+#   skip_if:   don't emit the component when the value equals this
+#   max:       clamp the value to this maximum
+#   value:     emit this fixed value instead of the MCreator value
+#              (useful for true/false flags)
+#
+# Field names can differ between MCreator versions. If the conversion report
+# lists a field as "unmapped", add it here.
+
+handled:            # read directly by the parser, never reported as unmapped
+  - name
+  - texture
+
+ignored:            # Java-only or cosmetic settings with no Bedrock meaning
+  - creativeTab
+  - creativeTabs
+  - specialInformation
+  - renderType
+  - customModelName
+
+fields:
+  stackSize:
+    component: minecraft:max_stack_size
+    max: 64
+
+  damageCount:
+    component: minecraft:durability
+    wrap: max_durability
+    skip_if: 0
+
+  enchantability:
+    component: minecraft:enchantable
+    wrap: value
+    extra: { slot: all }
+    skip_if: 0
+
+  hasGlow:
+    component: minecraft:glint
+    value: true
+    skip_if: false

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+out/
+*.mcaddon
+*.egg-info/
+.pytest_cache/
+.ruff_cache/

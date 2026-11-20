@@ -1,0 +1,14 @@
+{
+  "_fv": 70,
+  "_type": "item",
+  "definition": {
+    "name": "Ruby",
+    "texture": "ruby",
+    "stackSize": 64,
+    "damageCount": 0,
+    "enchantability": 0,
+    "hasGlow": true,
+    "creativeTab": "MISC",
+    "rarity": "RARE"
+  }
+}

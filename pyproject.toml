@@ -1,0 +1,26 @@
+[project]
+name = "mc2br"
+version = "0.1.0"
+description = "Convert MCreator (NeoForge) workspaces into Minecraft Bedrock add-ons"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6", "click>=8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+mc2br = "mc2br.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mc2br = ["mappings/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
