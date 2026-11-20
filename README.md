@@ -1,10 +1,9 @@
 # Catalyst Converter (mc2br)
 
-Converts MCreator (NeoForge) workspaces into Minecraft Bedrock add-ons (`.mcaddon`).
+__\[work in progress\]__
+__\[\#\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\]__
 
-It reads MCreator's own element files (`elements/*.mod.json`) instead of the
-generated Java, turns them into a platform-neutral intermediate representation,
-and writes a Bedrock behavior pack and resource pack.
+Converts NeoForge workspaces into Minecraft Bedrock add-ons (`.mcaddon`). Also has support for MCreator workspaces
 
 ## Setup
 
@@ -17,7 +16,7 @@ pip install -e ".[dev]"
 ## Usage
 
 ```bash
-mc2br path/to/MCreatorWorkspace -o out
+mc2br path/to/workspace -o out
 ```
 
 Output in `out/`:
@@ -26,7 +25,13 @@ Output in `out/`:
 - `<modid>.mcaddon`: both packs zipped; double-click to import into Minecraft
 - `report.md`: what was converted, what was skipped, and why
 
-## Supported so far
+## MCreator edition
+
+It reads MCreator's own element files (`elements/*.mod.json`) instead of the
+generated Java, turns them into a platform-neutral intermediate representation,
+and writes a Bedrock behavior pack and resource pack.
+
+### Supported so far
 
 | MCreator element | Status |
 |---|---|
@@ -37,15 +42,25 @@ Output in `out/`:
 
 ```
 src/mc2br/
-  workspace.py   finds and reads MCreator files
-  ir.py          platform-neutral data classes
-  mapping.py     applies the YAML replacement keys
-  mappings/      the replacement keys (MCreator field -> Bedrock component)
-  parsers/       MCreator element -> IR, one file per element type
-  emitters/      IR -> Bedrock JSON files
-  package.py     zips packs into .mcaddon
-  report.py      conversion report
-  cli.py         the `mc2br` command
+  take-input.py    what you actually run in the terminal
+  catalyst-base/   contains recodings for elements for java parity and customizability
+    behavior-pack/...
+    resource-pack/...
+  mcreator/
+    workspace.py   finds and reads MCreator files
+    ir.py          platform-neutral data classes
+    mapping.py     applies the YAML replacement keys
+    mappings/...   the replacement keys (MCreator field -> Bedrock component)
+    parsers/...    MCreator element -> IR, one file per element type
+    emitters/...   IR -> Bedrock JSON files
+    package.py     zips packs into .mcaddon
+    report.py      conversion report
+    cli.py         the `mc2br` command
+  neoforge/
+    identify.py    simplifies workspace into JSON and identifies mod element types
+  ollama/
+    ollama.py      AI fallback for unknown mod elements, requires a beefy computer and --use-ollama in take-input.py
+    training-data/...
 ```
 
 ## Tests
@@ -53,3 +68,4 @@ src/mc2br/
 ```bash
 pytest
 ```
+
