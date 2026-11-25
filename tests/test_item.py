@@ -2,9 +2,9 @@ import json
 import zipfile
 from pathlib import Path
 
-from mc2br.cli import convert
-from mc2br.mapping import apply_mapping
-from mc2br.parsers.item import to_identifier
+from mc2br_mcreator.cli import convert
+from mc2br_mcreator.mapping import apply_mapping
+from mc2br_mcreator.parsers.item import to_identifier
 
 FIXTURE = Path(__file__).parent / "fixtures" / "simple_mod"
 
